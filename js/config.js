@@ -1,0 +1,1 @@
+var SOLR_URL = "http://192.168.3.8:7574/solr/techproducts/select?q=";
