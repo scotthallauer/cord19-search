@@ -13,15 +13,15 @@
 
   function get_result_title($result) {
     if (!isset($result["metadata.title"])) {
-      return "No Title";
+      return "<h2>Untitled Article</h2>";
     } else {
-      return $result["metadata.title"];
+      return "<h2>" . $result["metadata.title"] . "</h2>";
     }
   }
 
   function get_result_authors($result) {
     if (!isset($result["metadata.authors.last"])) {
-      $output = "No Authors";
+      $output = "";
     } else {
       $author_count = count($result["metadata.authors.last"]);
       if ($author_count > 3) {
@@ -38,7 +38,7 @@
         }
       }
     }
-    return $output;
+    return "<h3>" . $output . "</h3>";
   }
 
   function get_result_description($result) {
@@ -69,21 +69,69 @@
     return $output;
   }
 
+  function get_result_document($result) {
+    $output = "";
+    # title
+    if (isset($result["metadata.title"])) {
+      $output .= "<h1>" . $result["metadata.title"] . "</h1>";
+    }
+    # authors
+    if (isset($result["metadata.authors.last"])) {
+      $output .= "<h2>";
+      $author_count = count($result["metadata.authors.last"]);
+      for ($i = 0; $i < $author_count; $i++) {
+        $output .= $result["metadata.authors.first"][$i] . " " . $result["metadata.authors.last"][$i];
+        if ($i < $author_count-2) {
+          $output .= ", ";
+        } elseif ($i == $author_count-2) {
+          $output .= " and ";
+        }
+      }
+      $output .= "</h2>";
+    }
+    # abstract
+    if (isset($result["abstract.text"])) {
+      $output .= "<h3>Abstract</h3>";
+      foreach ($result["abstract.text"] as $text) {
+        $output .= "<p>" . $text . "</p>";
+      }
+    }
+    # body
+    if (isset($result["body_text.text"])) {
+      $section = "";
+      $text_count = count($result["body_text.text"]);
+      for ($i = 0; $i < $text_count; $i++) {
+        if (isset($result["body_text.section"][$i]) && $result["body_text.section"][$i] != $section) {
+          $section = $result["body_text.section"][$i];
+          $output .= "<h3>" . $section . "</h3>";
+        }
+        $output .= "<p>" . $result["body_text.text"][$i] . "</p>";
+      }
+    }
+    return $output;
+  }
+
   function present_search_results($results) {
-    if (!$results) {
-      echo "Server Unreachable!";
+    if (!isset($results) || !$results) {
+      echo "No Results";
     } else {
+      $i = 0;
       foreach ($results["response"]["docs"] as $result) {
         echo "
-          <div class='result-box'>
-            <h2>" . get_result_title($result) . "</h2>
-            <h3>" . get_result_authors($result) . "</h3>
+          <div class='result-box' data-result-index='" . $i . "'>
+            <a href='javascript:void(0);' onclick='openResult(" . $i . ");'>" . get_result_title($result) . "</a>
+            " . get_result_authors($result) . "
             " .  get_result_description($result) . "
           </div>
+          <div id='document-" . $i . "' class='document-wrapper' onclick='closeResult(" . $i . ");'>
+            <div class='document-box'>
+              <img src='media/close-button.png'/>
+              " . get_result_document($result) . "
+            </div>
+          </div>
         ";
+        $i++;
       }
     }
   }
-
- # function format_result($)
 ?>

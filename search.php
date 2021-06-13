@@ -1,6 +1,5 @@
 <?php
   require_once("bin/results.php");
-
   $results = get_search_results($_GET["q"]);
 ?>
 <!DOCTYPE html>
@@ -15,12 +14,12 @@
       <table>
         <tr>
           <td>
-            <img src="media/cord19-logo.png" width="150px"/>
+            <img src="media/cord19-logo.png"/>
           </td>
           <td>
             <form action="search.php">
               <input type="text" name="q" value="<?php echo $_GET["q"]; ?>"/>
-              <input type="submit" value="Search"/>
+              <input type="submit" value="Submit"/>
             </form>
           </td>
         </tr>
@@ -33,9 +32,11 @@
       </table>
     </div>
     <div id="results-wrapper">
-      <?php 
-        present_search_results($results);
-      ?>
+      <?php present_search_results($results); ?>
     </div>
   </body>
+  <script type="text/javascript">
+    function openResult(i) { document.getElementById("document-" + i).style.display = "block"; }
+    function closeResult(i) { document.getElementById("document-" + i).style.display = "none"; }
+  </script>
 </html>
