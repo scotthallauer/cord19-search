@@ -22,3 +22,4 @@ bin/solr start
 
 bin/solr create -c cord19 -d cord19_configs
 
+bin/post -c cord19 collection/*.json

@@ -4,7 +4,7 @@
   function get_search_results($query) {
     global $SOLR_URL;
     try {
-      $response = file_get_contents($SOLR_URL . urlencode($query));
+      $response = file_get_contents($SOLR_URL . urlencode($query) . "&rows=20");
       return json_decode($response, true);
     } catch (Exception $e) {
       return false;
@@ -80,7 +80,10 @@
       $output .= "<h2>";
       $author_count = count($result["metadata.authors.last"]);
       for ($i = 0; $i < $author_count; $i++) {
-        $output .= $result["metadata.authors.first"][$i] . " " . $result["metadata.authors.last"][$i];
+        if (isset($result["metadata.authors.first"][$i])) {
+          $output .= $result["metadata.authors.first"][$i] . " ";
+        }
+        $output .= $result["metadata.authors.last"][$i];
         if ($i < $author_count-2) {
           $output .= ", ";
         } elseif ($i == $author_count-2) {
