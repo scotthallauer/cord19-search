@@ -1,10 +1,10 @@
 <?php
   require_once("bin/config.php");
 
-  function get_search_results($query) {
+  function get_search_results($query, $start) {
     global $SOLR_URL;
     try {
-      $response = file_get_contents($SOLR_URL . urlencode($query) . "&rows=20");
+      $response = file_get_contents($SOLR_URL . urlencode($query) . "&start=" . $start . "&rows=10");
       return json_decode($response, true);
     } catch (Exception $e) {
       return false;
@@ -114,18 +114,30 @@
     return $output;
   }
 
-  function present_search_results($results) {
-    if (!isset($results) || !$results) {
-      echo "No Results";
-    } else {
+  function present_search_results($results, $start) {
+    if (isset($results)) {
+      echo "<table id='result-list'>";
       $i = 0;
       foreach ($results["response"]["docs"] as $result) {
         echo "
-          <div class='result-box' data-result-index='" . $i . "'>
-            <a href='javascript:void(0);' onclick='openResult(" . $i . ");'>" . get_result_title($result) . "</a>
-            " . get_result_authors($result) . "
-            " .  get_result_description($result) . "
-          </div>
+          <tr>
+            <td class='result-number-box'>
+              " . ($i+$start+1) . "
+            </td>
+            <td class='result-details-box'>
+              <a href='javascript:void(0);' onclick='openResult(" . $i . ");'>" . get_result_title($result) . "</a>
+              " . get_result_authors($result) . "
+              " .  get_result_description($result) . "
+            </td>
+          </tr>
+        ";
+        $i++;
+      }
+      echo "</table>";
+      echo "<div id='result-documents'>";
+      $i = 0;
+      foreach ($results["response"]["docs"] as $result) {
+        echo "          
           <div id='document-" . $i . "' class='document-wrapper' onclick='closeResult(" . $i . ");'>
             <div class='document-box'>
               <img src='media/close-button.png'/>
@@ -135,6 +147,7 @@
         ";
         $i++;
       }
+      echo "</div>";
     }
   }
 ?>

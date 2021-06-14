@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>COVID-19 Search Engine</title>
+    <title>CORD-19 Search</title>
+    <link type="text/css" rel="stylesheet" href="css/reset.css"/>
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
   </head>
   <body>
-    <form action="search.php">
-      <input type="text" name="q"/>
-      <input type="submit" value="Submit"/>
-    </form>
+    <div id="home-search-wrapper">
+      <table>
+        <tr>
+          <td>
+            <img id="logo" src="media/cord19-logo.png"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form action="search.php">
+              <input id="search-text" type="text" name="q" autofocus/><button id="search-button" type="submit"><img src="media/search-icon.png"/></button>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

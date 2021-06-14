@@ -1,8 +1,62 @@
+#home-search-wrapper {
+  font-family: Helvetica, sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  margin-top: -200px;
+}
+#home-search-wrapper img#logo {
+  width: 400px;
+  margin-bottom: 40px;
+}
+#search-text {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  vertical-align: top;
+  box-sizing: border-box;
+  margin: 0;
+  width: 300px;
+  height: 32px;
+  padding: 5px;
+}
+#home-search-wrapper #search-text {
+  width: 80%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 40px;
+  padding: 10px;
+}
+#search-button {
+  margin: 0;
+  background-color: #9B2727;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 5px;
+}
+#home-search-wrapper #search-button {
+  width: 20%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 40px;
+  padding: 10px;
+}
+#search-button img {
+  width: 20px;
+  vertical-align: top;
+  margin-top: -1px;
+}
 #search-wrapper {
   font-family: Helvetica, sans-serif;
   padding: 20px 35px;
 }
-#search-wrapper img {
+#search-wrapper img#logo {
   width: 175px;
   margin-right: 20px;
 }
@@ -13,31 +67,40 @@
   max-width: 700px;
   box-sizing: border-box;
 }
-.result-box {
-  padding: 0 15px;
-  margin-bottom: 30px;
+#no-results-message h2 {
+  text-align: center;
+  font-size: 18px;
+  margin: 50px 0;
+  color: rgba(0, 0, 0, 0.5);
 }
-.result-box a{
+.result-details-box {
+  padding: 0 15px 30px 15px;
+}
+.result-details-box a {
   text-decoration: none;
   color: #1A0DAB;
 }
-.result-box a:hover{
+.result-details-box a:hover {
   text-decoration: underline;
 }
-.result-box h2 {
+.result-details-box h2 {
   font-weight: normal;
   font-size: 18px;
   margin-bottom: 5px;
 }
-.result-box h3 {
+.result-details-box h3 {
   font-size: 16px;
   margin-bottom: 5px;
 }
-.result-box h3 i {
+.result-details-box h3 i {
   font-style: italic;
 }
-.result-box p {
+.result-details-box p {
   font-size: 15px;
+}
+.result-number-box {
+  color: rgba(0, 0, 0, 0.6);
+  text-align: right;
 }
 .document-wrapper {
   display: none;
@@ -86,4 +149,21 @@
 .document-box p {
   margin-bottom: 10px;
   text-align: justify;
+}
+#results-navigator {
+  padding: 10px 0 30px 0;
+}
+#results-navigator table {
+  width: 100%;
+}
+#results-navigator td {
+  text-align: center;
+  width: 33.333333%;
+}
+#results-navigator a {
+  color: #9B2727;
+  text-decoration: none;
+}
+#results-navigator a:hover {
+  text-decoration: underline;
 }
