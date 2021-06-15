@@ -15,7 +15,8 @@
     if (!isset($result["metadata.title"])) {
       return "<h2>Untitled Article</h2>";
     } else {
-      return "<h2>" . $result["metadata.title"] . "</h2>";
+      $title = $result["metadata.title"];
+      return "<h2>" . (strlen($title) > 200 ? substr($title,0,200) . "..." : $title) . "</h2>";
     }
   }
 

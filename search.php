@@ -43,7 +43,7 @@
           <td></td>
           <td>
             <?php if($result_count > 0) { ?>
-            <p><?php echo "Page " . $page .  " of " . $result_count . " results (" . $query_time . " seconds)"; ?></p>
+            <p><?php echo ($start+1) .  " – " . ($start+10) . " of " . number_format($result_count) . " results (" . $query_time . " seconds)"; ?></p>
             <?php } ?>
           </td>
         </tr>
@@ -72,7 +72,7 @@
             <td>
               <?php 
                 if ($result_count > 0) { 
-                  echo "Page " . $page . " of " . ceil($result_count / 10);
+                  echo "Page " . $page . " of " . number_format(ceil($result_count / 10));
                 }
               ?>
             </td>

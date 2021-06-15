@@ -15,7 +15,9 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-right: none;
   border-top-left-radius: 5px;
+  border-top-right-radius: 0px;
   border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 0px;
   vertical-align: top;
   box-sizing: border-box;
   margin: 0;
@@ -55,6 +57,7 @@
 #search-wrapper {
   font-family: Helvetica, sans-serif;
   padding: 20px 35px;
+  margin-left: 100px;
 }
 #search-wrapper img#logo {
   width: 175px;
@@ -66,6 +69,7 @@
   width: 100%;
   max-width: 700px;
   box-sizing: border-box;
+  margin-left: 100px;
 }
 #no-results-message h2 {
   text-align: center;
@@ -166,4 +170,7 @@
 }
 #results-navigator a:hover {
   text-decoration: underline;
+}
+@media only screen and (max-width: 900px) {
+  #search-wrapper, #results-wrapper { margin-left: 0; }
 }
